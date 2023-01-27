@@ -69,7 +69,7 @@ G:\cmake-tutorial\libs\x64\Release
 
 ![Additional Library Directories](img/linkergeneral.PNG)
 
-3. Add the **Linker > Input** *Addtional Dependancies*
+3. Add the **Linker > Input** *Additional Dependencies*
 
 ```
 icisdk_x64.lib
