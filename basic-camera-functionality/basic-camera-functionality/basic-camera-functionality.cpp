@@ -10,8 +10,9 @@ using namespace cv;
 
 int main() {
 	VideoCapture cap(0);
+	int colorMap = -1;
 
-	// connect ti flir serial virtual COM Port
+	// connect to flir serial virtual COM Port
 
 	////set high gain
 	//bosonSetGainMode(0);
@@ -52,18 +53,41 @@ int main() {
 
 
 			// asethetic changes
-			applyColorMap(frame, coloredFrame, COLORMAP_HOT);
+            if (colorMap != -1) {
+                if  (colorMap == 2) {
+                    applyColorMap(frame, coloredFrame, COLORMAP_JET);
+                } else if (colorMap == 11) {
+                    applyColorMap(frame, coloredFrame, COLORMAP_HOT);
+                }
+                //saving video
+                video.write(coloredFrame);
 
-			//saving video
-			video.write(coloredFrame);
+                // display video
+                imshow("Frame", coloredFrame);
+            } else {
+                //saving video
+                video.write(frame);
 
-			// display video
-			imshow("Frame", coloredFrame);
+                // display video
+                imshow("Frame", frame);
+            }
 
 
 			// exit video recording
 			char c = (char)waitKey(1);
-			if (c == 27) {
+            if (c == 104) {
+                colorMap = 11;
+                printf("color map hot:");
+                cout << colorMap << endl;
+            } else if (c == 106){
+                colorMap = 2;
+                printf("color map jet:");
+                cout << colorMap << endl;
+            } else if (c == 119){
+                colorMap = -1;
+                printf("back to basics:");
+                cout << colorMap << endl;
+            } else if (c == 27) {
 				break;
 			}
 		}
