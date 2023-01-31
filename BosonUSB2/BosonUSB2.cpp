@@ -207,6 +207,11 @@ int main(int argc, char** argv )
 
     VideoCapture cap(0);
 
+	cout << ">>>> Press 'h' for COLORMAP_HOT" << endl;
+	cout << ">>>> Press 'j' for COLORMAP_JET" << endl;
+	cout << ">>>> Press 'w' for default" << endl;
+	cout << ">>>> Press ESC for to escape" << endl;
+
 	// connect ti flir serial virtual COM Port
 
 	////set high gain

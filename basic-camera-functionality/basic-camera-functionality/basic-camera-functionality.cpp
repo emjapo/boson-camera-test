@@ -36,6 +36,10 @@ int main() {
 
 	//if (handle)
 	//{
+	cout << ">>>> Press 'h' for COLORMAP_HOT" << endl;
+	cout << ">>>> Press 'j' for COLORMAP_JET" << endl;
+	cout << ">>>> Press 'w' for default" << endl;
+	cout << ">>>> Press ESC for to escape" << endl;
 
 		while (1) {
 			Mat frame;
