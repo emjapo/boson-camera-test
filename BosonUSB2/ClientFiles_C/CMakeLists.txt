@@ -1,0 +1,1 @@
+add_library(libbosonclient Client_API.c Client_Dispatcher.c Client_Packager.c Serializer_BuiltIn.c Serializer_Struct.c UART_Connector.c)

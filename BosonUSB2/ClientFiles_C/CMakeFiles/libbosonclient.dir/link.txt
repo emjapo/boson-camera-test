@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibbosonclient.a  CMakeFiles/libbosonclient.dir/Client_API.c.o CMakeFiles/libbosonclient.dir/Client_Dispatcher.c.o CMakeFiles/libbosonclient.dir/Client_Packager.c.o CMakeFiles/libbosonclient.dir/Serializer_BuiltIn.c.o CMakeFiles/libbosonclient.dir/Serializer_Struct.c.o CMakeFiles/libbosonclient.dir/UART_Connector.c.o
+/usr/bin/ranlib liblibbosonclient.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libUART_HalfDuplex64.a  CMakeFiles/UART_HalfDuplex64.dir/flirCRC.c.o CMakeFiles/UART_HalfDuplex64.dir/rs232.c.o CMakeFiles/UART_HalfDuplex64.dir/flirChannels.c.o CMakeFiles/UART_HalfDuplex64.dir/HostBinaryProtocol.c.o
+/usr/bin/ranlib libUART_HalfDuplex64.a
