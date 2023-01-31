@@ -229,7 +229,7 @@ int main(int argc, char** argv )
 	int frame_width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
 	int frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-	VideoWriter video("basic-HOT.mp4", cv::VideoWriter::fourcc('Y', '1', '6', ' '), 60, Size(frame_width, frame_height));
+	VideoWriter video("linux-video.avi", cv::VideoWriter::fourcc('X','V','I','D'), 60, Size(frame_width, frame_height));
 
 	//// create ici handle
 	//auto handle = CreateFlirBosonRawCountsToTemperatureInCelsiusHandle();
