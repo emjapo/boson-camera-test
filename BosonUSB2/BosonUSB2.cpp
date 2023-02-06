@@ -206,6 +206,7 @@ int main(int argc, char** argv )
 	printf("SUCCESS\n\n");
 
     VideoCapture cap(0);
+	VideoCapture cap2(2);
 
 	cout << ">>>> Press 'h' for COLORMAP_HOT" << endl;
 	cout << ">>>> Press 'j' for COLORMAP_JET" << endl;
@@ -224,12 +225,17 @@ int main(int argc, char** argv )
 		cout << "Error opening video stream or file" << endl;
 		return -1;
 	}
+	//check for camera
+	if (!cap2.isOpened()) {
+		cout << "Error opening video stream or file from second camera" << endl;
+		return -1;
+	}
 
 	// gets the resolutions and creates a video writer object
 	int frame_width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
 	int frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-	VideoWriter video("linux-video.avi", cv::VideoWriter::fourcc('X','V','I','D'), 60, Size(frame_width, frame_height));
+	VideoWriter video("twostreams.avi", cv::VideoWriter::fourcc('X','V','I','D'), 60, Size(frame_width*2, frame_height));
 
 	//// create ici handle
 	//auto handle = CreateFlirBosonRawCountsToTemperatureInCelsiusHandle();
@@ -242,9 +248,16 @@ int main(int argc, char** argv )
 			Mat frame;
 			Mat coloredFrame;
 
+			Mat frame2;
+			Mat coloredFrame2;
+
 			cap >> frame;
+			cap2 >> frame2;
 
 			if (frame.empty()) {
+				break;
+			}
+			if (frame2.empty()) {
 				break;
 			}
 			//// get FPA value from camera
@@ -262,18 +275,22 @@ int main(int argc, char** argv )
                 }
 
                     //saving video
-                video.write(coloredFrame);
+                // video.write(coloredFrame);
 
                 // display video
-                imshow("Frame", coloredFrame);
+                // imshow("Frame", coloredFrame);
             } else {
                 //saving video
-                video.write(frame);
-
+                // video.write(frame);
+				coloredFrame = frame;
                 // display video
-                imshow("Frame", frame);
+                // imshow("Frame", frame);
             }
 
+
+			hconcat(coloredFrame, frame2, frame);
+			video.write(frame);
+			imshow("Frame", frame);
 
 			// exit video recording
 			char c = (char)waitKey(1);
