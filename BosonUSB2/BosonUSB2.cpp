@@ -235,7 +235,7 @@ int main(int argc, char** argv )
 	int frame_width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
 	int frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-	VideoWriter video("twostreams.avi", cv::VideoWriter::fourcc('X','V','I','D'), 60, Size(frame_width*2, frame_height));
+	// VideoWriter video("samecolor.avi", cv::VideoWriter::fourcc('X','V','I','D'), 60, Size(frame_width*2, frame_height));
 
 	//// create ici handle
 	//auto handle = CreateFlirBosonRawCountsToTemperatureInCelsiusHandle();
@@ -249,7 +249,6 @@ int main(int argc, char** argv )
 			Mat coloredFrame;
 
 			Mat frame2;
-			Mat coloredFrame2;
 
 			cap >> frame;
 			cap2 >> frame2;
@@ -265,6 +264,7 @@ int main(int argc, char** argv )
 			//// call ici convert function need: void* handle , uint16_t* rawCounts , int rawDataLen , uint32_t fpa , uint32_t cameraSerialNumber
 			//auto temperatureInCeslius = ConvertFlirBosonCameraRawCountsToTemperatureInCelsius(handle, rawCounts.data(), rawCounts.size(), fpa, serialNumber);
 
+			hconcat(frame, frame2, frame);
 
 			// asethetic changes
             if (colorMap != -1) {
@@ -278,34 +278,24 @@ int main(int argc, char** argv )
                 // video.write(coloredFrame);
 
                 // display video
-                // imshow("Frame", coloredFrame);
+                imshow("Frame", coloredFrame);
             } else {
                 //saving video
                 // video.write(frame);
-				coloredFrame = frame;
+
                 // display video
-                // imshow("Frame", frame);
+                imshow("Frame", frame);
             }
 
-
-			hconcat(coloredFrame, frame2, frame);
-			video.write(frame);
-			imshow("Frame", frame);
 
 			// exit video recording
 			char c = (char)waitKey(1);
             if (c == 104) {
                 colorMap = 11;
-                printf("color map hot:");
-                cout << colorMap << endl;
             } else if (c == 106){
                 colorMap = 2;
-                printf("color map jet:");
-                cout << colorMap << endl;
             } else if (c == 119){
                 colorMap = -1;
-                printf("back to basics:");
-                cout << colorMap << endl;
             } else if (c == 27) {
 				break;
 			}
@@ -317,7 +307,7 @@ int main(int argc, char** argv )
 	// when everything is done release the video capture object and then close all frames
 
 	cap.release();
-	video.release();
+	// video.release();
 	destroyAllWindows();
 
 	 
