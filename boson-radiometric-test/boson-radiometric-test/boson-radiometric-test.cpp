@@ -14,6 +14,7 @@ int main() {
 	VideoCapture cap(0);
 
 	// connect ti flir serial virtual COM Port
+	//Initialize(port, baudrate = 921600);
 
 	//set high gain
 	bosonSetGainMode(0);
