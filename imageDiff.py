@@ -3,7 +3,7 @@ import numpy as np
 import os
 import sys
 
-from scipy.misc import imread
+# from scipy.misc import imread
 from scipy.linalg import norm
 from scipy import sum, average
 
@@ -11,7 +11,7 @@ from scipy import sum, average
 def compare_images(img1, img2):
     # calculate the difference and its norms
     diff = img1 - img2  # elementwise for scipy arrays
-    m_norm = sum(abs(diff))  # Manhattan norm
+    m_norm = np.sum(abs(diff))  # Manhattan norm
     z_norm = norm(diff.ravel(), 0)  # Zero norm
     return (m_norm, z_norm)
 
@@ -25,9 +25,14 @@ print()
 img1Path = os.path.normpath(input("Enter path of first image: "))
 img2Path = os.path.normpath(input("Enter path of second image: "))
 
-img1 = cv2.imread(img1Path, 0).astype(float)
-img2 = cv2.imread(img2Path, 0).astype(float)
+img1 = cv2.imread(img1Path, 0)
+img2 = cv2.imread(img2Path, 0)
 
+if img1 is None or img2 is None:
+    sys.exit("Path not found. Try using an absolute path or check your spelling.")
+
+img1 = img1.astype(float)
+img2 = img2.astype(float)
 
 #--- take the absolute difference of the images ---
 res = cv2.absdiff(img1, img2)
